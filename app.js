@@ -50,6 +50,12 @@ app.use(express.static('public'));//serving static files like css
 app.use('/', routes);//uses routes folder
 //app.use(routes);
 
+//using Account object for authentication
+var Account = require('./models/userAccount');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+
 
 
 var uri = 'mongodb://edgaras:belekas@ds129386.mlab.com:29386/todoapplication';

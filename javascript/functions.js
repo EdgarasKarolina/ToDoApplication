@@ -35,3 +35,19 @@ exports.containsUpperCases = function containsUpperCase(password)
         return false;
     }
 }
+
+exports.isNotEmpty = function isNotEmpty(message)
+{
+
+}
+
+exports.messageWasAdded = function messageWasAdded()
+{
+
+} 
+
+
+exports.messageWasAdded = function messageWasDeleted()
+{
+
+} 

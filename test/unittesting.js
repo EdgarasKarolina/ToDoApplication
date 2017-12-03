@@ -19,4 +19,16 @@ describe("printName()", function(){
         expect(result).to.equal(true);
     });
 
+    it("testing if message is not empty", function(){
+       
+    });
+
+    it("testing if message was added", function(){
+        
+     });
+
+    it("testing if message was deleted", function(){
+        
+     });
+
 });

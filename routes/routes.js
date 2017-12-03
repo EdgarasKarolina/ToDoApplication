@@ -20,12 +20,37 @@ router.set('view engine', 'jade');
 //router.use(express.static(path.join(__dirname, '../public')));
 
 
-
-//
 router.get('/', (req, res) => {
 
     res.render('index', { user : req.user });
 
 }); 
+
+//get for register view
+router.get('/register', (req, res) => {
+    res.render('register', { });
+});
+
+//post for register view
+router.post('/register', (req, res, next) => {
+    Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
+        if (err) {
+          return res.render('register', { error : err.message });
+        }
+
+        passport.authenticate('local')(req, res, () => {
+            req.session.save((err) => {
+                if (err) {
+                    return next(err);
+                }
+                //redirects to '/' and if user already logged in
+                //then it shows loged in view
+                res.redirect('/');
+            });
+        });
+    });
+});
+
+
 
 module.exports = router;

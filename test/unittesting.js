@@ -1,13 +1,22 @@
 var expect  = require('chai').expect;
 require( 'mocha-directory' )();
 
+var greetings = require("./../javascript/functions.js");
+
 describe("printName()", function(){
-    it("some crap, dont know what im doing", function(){
-        var result = 5;
-        expect(result).to.equal(5);
+    it("testing if user name is between 3 and 15 characters", function(){
+        var result = greetings.checkUserNames("Jonaitis");
+        expect(result).to.equal(true);
     });
-    it("this is also shit", function(){
-        var result = 10;
-        expect(result).to.equal(10);
+
+    it("testing if password contains number", function(){
+        var result = greetings.checkPasswords("kazkada56");
+        expect(result).to.equal(true);
     });
+
+    it("testing if password contains upper case letter", function(){
+        var result = greetings.containsUpperCases("k65azkdaS");
+        expect(result).to.equal(true);
+    });
+
 });

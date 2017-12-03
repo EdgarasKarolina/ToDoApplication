@@ -37,14 +37,16 @@ router.get('/register', (req, res) => {
 //post for register view
 router.post('/register', (req, res, next) => {
 
-    var result = greetings.checkUserNames(req.body.username);
-    if(result)
+    var userName = greetings.checkUserNames(req.body.username);
+    var passwordContainsNumber = greetings.checkPasswords(req.body.password);
+    var passwordContainsUpperCase = greetings.containsUpperCases(req.body.password);
+
+    if(userName && passwordContainsNumber && passwordContainsUpperCase)
     {
         Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
             if (err) {
               return res.render('register', { error : err.message });
             }
-    
             passport.authenticate('local')(req, res, () => {
                 req.session.save((err) => {
                     if (err) {
@@ -59,12 +61,37 @@ router.post('/register', (req, res, next) => {
     }
 
     else {
+       
         res.render('index', { user : req.user });
     }
-
-
-   
 });
+
+ //gets all messages written by logged in user
+ router.get('/messages',(req , res) =>{
+    Message.find({"username" : req.user.username}, function(err , i){
+        if (err) return console.log(err)
+
+        res.render('getMessages',{messages: i})  
+     })
+ });
+
+ //gets important messages written by logged in user
+router.get('/importantMessages',(req , res) =>{
+    Message.find({"username" : req.user.username, "importance" : "Important"}, function(err , i){
+        if (err) return console.log(err)
+
+        res.render('getMessages',{messages: i})  
+     })
+ }); 
+
+//gets not important messages written by logged in user
+router.get('/notImportantMessages',(req , res) =>{
+    Message.find({"username" : req.user.username, "importance" : "Notimportant"}, function(err , i){
+        if (err) return console.log(err)
+
+        res.render('getMessages',{messages: i})  
+     })
+ }); 
 
 
 

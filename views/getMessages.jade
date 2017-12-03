@@ -1,0 +1,27 @@
+extends layout
+
+
+block content
+  
+  .container
+    P
+      a(href='/newMessage')
+        button.btn.btn-primary(type="button") Add new message
+
+      a(href='/sendPost')
+        button.btn.btn-primary(type="button") Send message to other user
+
+    h1 List of messages 
+    p 
+      a(href='/messages')
+        button.btn.btn-primary(type="button") All messages
+      a(href='/importantMessages')
+        button.btn.btn-primary(type="button") Important messages
+      a(href='/notImportantMessages')
+        button.btn.btn-primary(type="button") Not important messages
+   
+    each item, i in messages
+     li.list-group-item #{item.date} 
+      h3 #{item.content}    
+      a(href="#" class="deleteUser" data-id = "#{item._id}")
+        button.btn.btn-danger(type="button") Delete

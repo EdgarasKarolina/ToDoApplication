@@ -93,6 +93,56 @@ router.get('/notImportantMessages',(req , res) =>{
      })
  }); 
 
+ //inserting message for user himself "GET"
+router.get('/newMessage', (req, res) => {
+    res.render('insertMessage', { user : req.user });
+});
+
+
+//inserting message for user himself "POST"
+router.post('/newMessage',(req, res, next) => {
+   // Message.save(new Message({username : req.body.username, content : req.body.content})
+   var message = new Message()
+   message.username = req.body.username
+   message.content = req.body.content
+   message.importance = req.body.importance
+   var dt1 = new Date();
+   message.date = dt1
+   message.save(req.body, function(err, data) {
+
+    Message.find({"username" : req.user.username}, function(err, i) {
+        if (err) return console.log(err) 
+
+            res.render('getMessages', {messages: i})
+    });
+   });
+               
+});
+
+router.get('/login', (req, res) => {
+    res.render('login', { user : req.user, error : req.flash('error')});
+});
+
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
+    req.session.save((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/');
+    });
+});
+
+
+router.get('/logout', (req, res, next) => {
+    req.logout();
+    req.session.save((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/');
+    });
+});
+
 
 
 module.exports = router;

@@ -1,8 +1,6 @@
 var expect  = require('chai').expect;
 require( 'mocha-directory' )();
 
-var mockito = require('mokjs');
-
 var greetings = require("./../javascript/functions.js");
 
 describe("printName()", function(){
@@ -47,9 +45,14 @@ describe("printName()", function(){
         expect(result).to.equal(true);
     });
 
-    it("testing if message is not empty", function(){
+    it("testing if message is not empty, giving not empty message", function(){
         var result = greetings.isNotEmpty("message");
         expect(result).to.equal(true);
+    });
+
+    it("testing if message is not empty, giving empty message", function(){
+        var result = greetings.isNotEmpty("");
+        expect(result).to.equal(false);
     });
 
     it("testing if message is not longer than 60 characters, inserting 59", function(){

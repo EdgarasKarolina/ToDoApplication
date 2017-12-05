@@ -29,7 +29,6 @@ router.get('/', (req, res) => {
 
 }); 
 
-//var result = greetings.checkUserNames("Jonaitis");
 //get for register view
 router.get('/register', (req, res) => {
     res.render('register', { });
@@ -102,7 +101,10 @@ router.get('/newMessage', (req, res) => {
 
 //inserting message for user himself "POST"
 router.post('/newMessage',(req, res, next) => {
-   // Message.save(new Message({username : req.body.username, content : req.body.content})
+    var isMessageMax60 = greetings.maximum60Characters(req.body.content);
+    var isNotEmpty = greetings.isNotEmpty(req.body.content);
+if(isMessageMax60 && isNotEmpty)
+{
    var message = new Message()
    message.username = req.body.username
    message.content = req.body.content
@@ -116,8 +118,11 @@ router.post('/newMessage',(req, res, next) => {
 
             res.render('getMessages', {messages: i})
     });
-   });
-               
+   }); 
+}
+   else {
+    res.render('insertMessage', { user : req.user });
+   }
 });
 
 router.get('/login', (req, res) => {

@@ -38,7 +38,7 @@ exports.containsUpperCases = function containsUpperCase(password)
 
 exports.maximum60Characters = function isLessThan60Characters(message)
 {
-    if(message < 61)
+    if(message.length < 61)
     {
         return true;
     }
@@ -49,7 +49,7 @@ exports.maximum60Characters = function isLessThan60Characters(message)
 
 exports.isNotEmpty = function isNotEmpty(message)
 {
-  if(message)
+  if(message.length > 0)
   {
       return true;
   }

@@ -18,6 +18,7 @@
     "jade": "^1.11.0",
     "mocha": "^4.0.1",
     "mocha-directory": "^2.3.0",
+    "mokjs": "0.0.3",
     "mongoose": "^4.4.1",
     "morgan": "^1.9.0",
     "passport": "^0.4.0",

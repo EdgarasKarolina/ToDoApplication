@@ -36,6 +36,17 @@ exports.containsUpperCases = function containsUpperCase(password)
     }
 }
 
+exports.maximum60Characters = function isLessThan60Characters(message)
+{
+    if(message < 61)
+    {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 exports.isNotEmpty = function isNotEmpty(message)
 {
   if(message)
@@ -58,8 +69,7 @@ exports.messageWasAdded = function messageWasDeleted()
 
 } 
 
-//making an AJAX request
-//in order to excange data with a server
+
 exports.userNameNotValid = function userNameNotValid()
 {
 	var confirmation = confirm('Username must be between 3-15 characters long');
@@ -71,6 +81,5 @@ exports.userNameNotValid = function userNameNotValid()
 	else{
 		return false;
 	}
-
-	
 }
+

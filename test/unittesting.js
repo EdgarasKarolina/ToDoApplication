@@ -1,6 +1,8 @@
 var expect  = require('chai').expect;
 require( 'mocha-directory' )();
 
+var mockito = require('mokjs');
+
 var greetings = require("./../javascript/functions.js");
 
 describe("printName()", function(){
@@ -48,6 +50,24 @@ describe("printName()", function(){
     it("testing if message is not empty", function(){
         var result = greetings.isNotEmpty("message");
         expect(result).to.equal(true);
+    });
+
+    it("testing if message is not longer than 60 characters, inserting 59", function(){
+        var message = "qwertyuiop[asdfghjkl;'zxcvbnm,./qwertyuiop[asdfghjkl;zxcvbn";
+        var result = greetings.maximum60Characters(message.length);
+        expect(result).to.equal(true);
+    });
+
+    it("testing if message is not longer than 60 characters, inserting 60", function(){
+        var message = "qwertyuiop[asdfghjkl;'zxcvbnm,./qwertyuiop[asdfghjkl;zxcvbnu";
+        var result = greetings.maximum60Characters(message.length);
+        expect(result).to.equal(true);
+    });
+
+    it("testing if message is not longer than 60 characters, inserting 61", function(){
+        var message = "qwertyuiop[asdfghjkl;'zxcvbnm,./qwertyuiop[asdfghjkl;zxcvbnur";
+        var result = greetings.maximum60Characters(message.length);
+        expect(result).to.equal(false);
     });
 
     it("testing if message was added", function(){

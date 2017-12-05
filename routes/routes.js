@@ -19,6 +19,7 @@ var path = require('path');//provides utilities for working with file and direct
 
 router.set('views', path.join(__dirname, '../views'));//setting path to views folder
 router.set('view engine', 'jade');
+router.use(express.static(path.join(__dirname, '../public')));
 //router.use(express.static(path.join(__dirname, '../public')));
 
 
@@ -142,6 +143,49 @@ router.get('/logout', (req, res, next) => {
         res.redirect('/');
     });
 });
+
+//get view to send post to another user
+router.get('/sendPost',(req , res) =>{
+    Account.find(function(err , i){
+        if (err) return console.log(err)
+
+        res.render('sendPost',{accounts: i})  
+     })
+ });
+
+//post method for sending post to another user
+router.post('/sendPost',(req, res, next) => {
+   // Message.save(new Message({username : req.body.username, content : req.body.content})
+   var message = new Message()
+   message.username = req.body.username
+   message.content = req.body.content
+   message.importance = req.body.importance
+   var dt1 = new Date();
+   message.date = dt1
+   message.save(req.body, function(err, data) {
+    //maybe insert here???
+    Message.find({"username" : req.user.username}, function(err, i) {
+        if (err) return console.log(err) 
+
+            res.render('getMessages', {messages: i})
+        
+    });
+   });
+               
+});  
+
+router.delete('/messages/:id',(req , res) =>{
+    
+    console.log(req.params.id)
+    
+      Message.remove({"_id": ObjectId(req.params.id)}, function(err, result){
+        if (err) {
+          console.log(err);
+        } 
+    
+      });
+       
+     });
 
 
 

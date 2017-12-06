@@ -58,13 +58,13 @@ describe("printName()", function(){
     it("testing if message is not longer than 60 characters, inserting 59", function(){
         var message = "qwertyuiop[asdfghjkl;'zxcvbnm,./qwertyuiop[asdfghjkl;zxcvbn";
         var result = greetings.maximum60Characters(message.length);
-        expect(result).to.equal(true);
+        expect(result).to.equal(false);
     });
 
     it("testing if message is not longer than 60 characters, inserting 60", function(){
         var message = "qwertyuiop[asdfghjkl;'zxcvbnm,./qwertyuiop[asdfghjkl;zxcvbnu";
         var result = greetings.maximum60Characters(message.length);
-        expect(result).to.equal(true);
+        expect(result).to.equal(false);
     });
 
     it("testing if message is not longer than 60 characters, inserting 61", function(){

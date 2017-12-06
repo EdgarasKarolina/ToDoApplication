@@ -11,8 +11,6 @@ var ObjectId = require('mongodb').ObjectID;
 //requiring for file with Java Script functions
 var greetings = require("../javascript/functions");
 
-//this block is new added
-//so that dont need to use express.Router();
 var router = express();
 
 var path = require('path');//provides utilities for working with file and directory paths
@@ -25,7 +23,7 @@ router.use(express.static(path.join(__dirname, '../public')));
 
 router.get('/', (req, res) => {
 
-    res.render('index', { user : req.user });
+    res.render('login', { user : req.user });
 
 }); 
 
@@ -62,7 +60,7 @@ router.post('/register', (req, res, next) => {
 
     else {
        
-        res.render('index', { user : req.user });
+        res.render('register', { user : req.user });
     }
 });
 
@@ -70,8 +68,8 @@ router.post('/register', (req, res, next) => {
  router.get('/messages',(req , res) =>{
     Message.find({"username" : req.user.username}, function(err , i){
         if (err) return console.log(err)
-
-        res.render('getMessages',{messages: i})  
+       
+        res.render('getMessages',{messages: i, user : req.user})  
      })
  });
 
@@ -80,7 +78,7 @@ router.get('/importantMessages',(req , res) =>{
     Message.find({"username" : req.user.username, "importance" : "Important"}, function(err , i){
         if (err) return console.log(err)
 
-        res.render('getMessages',{messages: i})  
+        res.render('getMessages',{messages: i, user : req.user})  
      })
  }); 
 
@@ -89,13 +87,13 @@ router.get('/notImportantMessages',(req , res) =>{
     Message.find({"username" : req.user.username, "importance" : "Notimportant"}, function(err , i){
         if (err) return console.log(err)
 
-        res.render('getMessages',{messages: i})  
+        res.render('getMessages',{messages: i, user : req.user})  
      })
  }); 
 
  //inserting message for user himself "GET"
 router.get('/newMessage', (req, res) => {
-    res.render('insertMessage', { user : req.user });
+    res.render('insertMessage', { user : req.user, user : req.user });
 });
 
 
@@ -116,12 +114,12 @@ if(isMessageMax60 && isNotEmpty)
     Message.find({"username" : req.user.username}, function(err, i) {
         if (err) return console.log(err) 
 
-            res.render('getMessages', {messages: i})
+            res.render('getMessages', {messages: i, user : req.user})
     });
    }); 
 }
    else {
-    res.render('insertMessage', { user : req.user });
+    res.render('insertMessage', { user : req.user, user : req.user });
    }
 });
 
@@ -154,7 +152,7 @@ router.get('/sendPost',(req , res) =>{
     Account.find(function(err , i){
         if (err) return console.log(err)
 
-        res.render('sendPost',{accounts: i})  
+        res.render('sendPost',{accounts: i, user : req.user})  
      })
  });
 
@@ -172,11 +170,10 @@ router.post('/sendPost',(req, res, next) => {
     Message.find({"username" : req.user.username}, function(err, i) {
         if (err) return console.log(err) 
 
-            res.render('getMessages', {messages: i})
+            res.render('getMessages', {messages: i, user : req.user})
         
     });
    });
-               
 });  
 
 router.delete('/messages/:id',(req , res) =>{

@@ -2,21 +2,28 @@ extends layout
 
 
 block content
-  
+
   .container
     P
       a(href='/newMessage')
-        button.btn.btn-primary(type="button") Add new message
-
+        button.btn.btn-success(type="button") Add new ToDo task
+        &nbsp;
       a(href='/sendPost')
-        button.btn.btn-primary(type="button") Send message to other user
+        button.btn.btn-success(type="button") Send ToDo task to other user
+        &nbsp;
+      a(href='/logout')
+        button.btn.btn-danger(type="button") Logout
+        &nbsp;
+      p Welcome #{user.username}
 
-    h1 List of messages 
+    h1 List of ToDo tasks 
     p 
       a(href='/messages')
         button.btn.btn-primary(type="button") All messages
+        &nbsp;
       a(href='/importantMessages')
         button.btn.btn-primary(type="button") Important messages
+        &nbsp;
       a(href='/notImportantMessages')
         button.btn.btn-primary(type="button") Not important messages
    
@@ -26,5 +33,4 @@ block content
       a(href="#" class="deleteUser" data-id = "#{item._id}")
         button.btn.btn-danger(type="button") Delete
 
-    a(href='/logout')
-        button.btn.btn-primary(type="button") LogOut
+    

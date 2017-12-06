@@ -2,6 +2,7 @@ extends layout
 
 block content
   .container
+   if (!user)
     h1 Login Page
     br
     form(role='form', action="/login",method="post", style='max-width: 300px;')
@@ -11,5 +12,9 @@ block content
         input.form-control(type='password', name="password", placeholder='Password')
       button.btn.btn-success(type='submit') Login
       &nbsp;
-      a(href='/')
-        button.btn.btn-danger(type="button") Cancel
+      a(href="/register") 
+       button.btn.btn-primary(type="button") Register
+  if (user)
+      p You are currently logged in as #{user.username}
+      a(href="/messages") 
+       button.btn.btn-success(type="button") Go to your messages

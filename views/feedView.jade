@@ -5,10 +5,10 @@ block content
 
   .container
     P
-      a(href='/newMessage')
+      a(href='/createToDo')
         button.btn.btn-success(type="button") Add new ToDo task
         &nbsp;
-      a(href='/sendPost')
+      a(href='/sendToDo')
         button.btn.btn-success(type="button") Send ToDo task to other user
         &nbsp;
       a(href='/logout')
@@ -18,13 +18,13 @@ block content
 
     h1 List of ToDo tasks 
     p 
-      a(href='/messages')
+      a(href='/feed')
         button.btn.btn-primary(type="button") All messages
         &nbsp;
-      a(href='/importantMessages')
+      a(href='/importantToDo')
         button.btn.btn-primary(type="button") Important messages
         &nbsp;
-      a(href='/notImportantMessages')
+      a(href='/notImportantToDo')
         button.btn.btn-primary(type="button") Not important messages
    
     each item, i in messages

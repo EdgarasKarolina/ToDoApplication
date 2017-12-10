@@ -1,6 +1,4 @@
-//with REQUIRE you get module and with USE you use the module!!!!
 
-// dependencies
 var express = require('express');//web app framework for nodejs
 var path = require('path');//provides utilities for working with file and directory paths 
 var morgan = require('morgan');//logs incoming requests to the console
@@ -12,26 +10,19 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy; //strategy for authentication with username and password
 var flash = require('connect-flash');//used to display flash messages f.x. if user entered wrong password
-
 var routes = require('./routes/routes');
-
-
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-//app.set('view engine', 'ejs');
-
 
 app.use(morgan('dev'));//whenever the is request it will go through 'morgan' first
 app.use(bodyParser.json()); // parser accepts only UTF-8 encoding of the body
 //extended option allows to choose between parsing 
 //the URL-encoded data with the querystring library (when false) 
 app.use(bodyParser.urlencoded({ extended: false })); 
-
-
 app.use(cookieParser());
 app.use(require('express-session')({
     secret: 'keyboard cat',
@@ -42,13 +33,9 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(flash());
 app.use(passport.session());
-
 app.use(express.static('public'));//serving static files like css
-
-
-//both are working
 app.use('/', routes);//uses routes folder
-//app.use(routes);
+
 
 //using Account object for authentication
 var Account = require('./models/userAccount');
@@ -57,11 +44,11 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 
-
+//connecting to database
 var uri = 'mongodb://edgaras:belekas@ds129386.mlab.com:29386/todoapplication';
 mongoose.connect(uri);
 
-//trying to handle errors but most likely will delete this
+//handling errors
 app.use(function(req, res) {
     var err = new Error('Not Found');
     err.status = 404;
@@ -69,24 +56,11 @@ app.use(function(req, res) {
 });
 
 
-
-
-//app.listen(3000, function()
-  //{
-    //console.log('Listening on port 3000');
-  //});
-
-  //app.listen(process.env.PORT || 3000, function(){
-   // console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-  //});
-
-  app.set( 'port', ( process.env.PORT || 5000 ));
-  
+  app.set( 'port', ( process.env.PORT || 3000 ));
   // Start node server
   app.listen( app.get( 'port' ), function() {
     console.log( 'Node server is running on port ' + app.get( 'port' ));
     });
-
 
 
 module.exports = app;

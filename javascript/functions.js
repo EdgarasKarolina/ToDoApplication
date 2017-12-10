@@ -1,5 +1,4 @@
 
-
 exports.checkUserNames = function checkUserName(username)
 {
     if(username.length > 2 && username.length <16)
@@ -57,18 +56,6 @@ exports.isNotEmpty = function isNotEmpty(message)
       return false;
   }
 }
-
-exports.messageWasAdded = function messageWasAdded()
-{
-
-} 
-
-
-exports.messageWasAdded = function messageWasDeleted()
-{
-
-} 
-
 
 exports.userNameNotValid = function userNameNotValid()
 {

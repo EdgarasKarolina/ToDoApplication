@@ -1,5 +1,4 @@
 
-
 //jQuery 
 //calling deleteUser function 
 //when clicked on "Delete" link in view
@@ -11,8 +10,6 @@ $(document).ready(function()
 }
 );
 
-//making an AJAX request
-//in order to excange data with a server
 function deleteUser()
 {
 	var confirmation = confirm('Are you sure want to delete this message?');
@@ -25,10 +22,10 @@ function deleteUser()
 
 		}).done(function(response){
 
-			window.location.replace('messages');
+			window.location.replace('feed');
 		});
 		//redirecting to "getMessages" view 
-		window.location.replace('messages');
+		window.location.replace('feed');
 	}
 	else{
 		return false;

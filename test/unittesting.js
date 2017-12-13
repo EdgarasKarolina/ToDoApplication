@@ -56,20 +56,20 @@ describe("tests()", function(){
     });
 
     it("testing if message is not longer than 60 characters, inserting 59", function(){
-        var message = "qwertyuiop[asdfghjkl;'zxcvbnm,./qwertyuiop[asdfghjkl;zxcvbn";
-        var result = methods.maximum60Characters(message.length);
-        expect(result).to.equal(false);
+        var message = "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+        var result = methods.maximum60Characters(message);
+        expect(result).to.equal(true);
     });
 
     it("testing if message is not longer than 60 characters, inserting 60", function(){
-        var message = "qwertyuiop[asdfghjkl;'zxcvbnm,./qwertyuiop[asdfghjkl;zxcvbnu";
-        var result = methods.maximum60Characters(message.length);
-        expect(result).to.equal(false);
+        var message = "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeb";
+        var result = methods.maximum60Characters(message);
+        expect(result).to.equal(true);
     });
 
     it("testing if message is not longer than 60 characters, inserting 61", function(){
-        var message = "qwertyuiop[asdfghjkl;'zxcvbnm,./qwertyuiop[asdfghjkl;zxcvbnur";
-        var result = methods.maximum60Characters(message.length);
+        var message = "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbb";
+        var result = methods.maximum60Characters(message);
         expect(result).to.equal(false);
     });
 });

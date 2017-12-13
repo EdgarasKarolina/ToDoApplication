@@ -49,11 +49,12 @@ var uri = 'mongodb://edgaras:belekas@ds129386.mlab.com:29386/todoapplication';
 mongoose.connect(uri);
 
 //handling errors
+
 app.use(function(req, res) {
     var err = new Error('Not Found');
     err.status = 404;
-    res.send("There was an error dude");
-});
+    res.send('There was an error dude');
+});  
 
 
   app.set( 'port', ( process.env.PORT || 3000 ));

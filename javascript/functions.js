@@ -1,4 +1,3 @@
-
 exports.checkUserNames = function checkUserName(username)
 {
     if(username.length > 2 && username.length <16)
